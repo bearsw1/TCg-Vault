@@ -1,0 +1,5 @@
+{
+  "name": "TCG Vault",
+  "description": "Secure inventory management for trading card game collectors. Track your Yu-Gi-Oh!, Pokémon, and other TCG collections with binder page tracking and storage organization.",
+  "requestFramePermissions": ["camera"]
+}
