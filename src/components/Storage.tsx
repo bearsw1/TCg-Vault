@@ -99,12 +99,12 @@ export default function Storage() {
     <div className="space-y-8">
       <header className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-stone-900 tracking-tight">Storage Locations</h2>
-          <p className="text-stone-500">Visually organize your physical storage</p>
+          <h2 className="text-3xl font-bold text-stone-900 dark:text-white tracking-tight">Storage Locations</h2>
+          <p className="text-stone-500 dark:text-stone-400">Visually organize your physical storage</p>
         </div>
         <button 
           onClick={() => setIsAdding(true)}
-          className="bg-emerald-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all flex items-center space-x-2 shadow-lg shadow-emerald-200/50"
+          className="bg-emerald-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all flex items-center space-x-2 shadow-lg shadow-emerald-200/50 dark:shadow-emerald-900/20"
         >
           <Plus size={20} />
           <span>New Location</span>
@@ -120,11 +120,11 @@ export default function Storage() {
           <motion.div 
             initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
-            className="bg-white w-full max-w-2xl rounded-3xl p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-stone-900 w-full max-w-2xl rounded-3xl p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-stone-900">Add Storage Location</h3>
-              <button onClick={() => { setIsAdding(false); resetForm(); }} className="text-stone-400 hover:text-stone-600 p-2">
+              <h3 className="text-2xl font-bold text-stone-900 dark:text-white">Add Storage Location</h3>
+              <button onClick={() => { setIsAdding(false); resetForm(); }} className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-2">
                 <X size={24} />
               </button>
             </div>
@@ -132,22 +132,22 @@ export default function Storage() {
             <form onSubmit={handleAdd} className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-2 uppercase tracking-wider">Location Name</label>
+                  <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2 uppercase tracking-wider">Location Name</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                     placeholder="e.g. Blue Zipper Binder"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-2 uppercase tracking-wider">Storage Type</label>
+                  <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2 uppercase tracking-wider">Storage Type</label>
                   <select
                     value={type}
                     onChange={(e) => setType(e.target.value as StorageType)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option value="Binder">Binder</option>
                     <option value="Deck Box">Deck Box</option>
@@ -157,11 +157,11 @@ export default function Storage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-2 uppercase tracking-wider">Description</label>
+                  <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2 uppercase tracking-wider">Description</label>
                   <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none h-32 bg-stone-50"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none h-32 bg-stone-50 dark:bg-stone-800 dark:text-white"
                     placeholder="Describe what's inside..."
                   />
                 </div>
@@ -169,8 +169,8 @@ export default function Storage() {
 
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-bold text-stone-700 mb-2 uppercase tracking-wider">Location Photo</label>
-                  <div className="aspect-square bg-stone-50 rounded-3xl border-2 border-dashed border-stone-200 flex flex-col items-center justify-center relative overflow-hidden group">
+                  <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2 uppercase tracking-wider">Location Photo</label>
+                  <div className="aspect-square bg-stone-50 dark:bg-stone-800 rounded-3xl border-2 border-dashed border-stone-200 dark:border-stone-700 flex flex-col items-center justify-center relative overflow-hidden group">
                     {photoUrl ? (
                       <>
                         <img src={photoUrl} className="w-full h-full object-cover" alt="Preview" />
@@ -193,16 +193,16 @@ export default function Storage() {
                       </>
                     ) : (
                       <div className="text-center p-6">
-                        <ImageIcon size={48} className="mx-auto text-stone-200 mb-4" />
+                        <ImageIcon size={48} className="mx-auto text-stone-200 dark:text-stone-700 mb-4" />
                         <button 
                           type="button"
                           onClick={startCamera}
-                          className="text-emerald-600 font-bold hover:underline flex items-center justify-center space-x-2"
+                          className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center justify-center space-x-2"
                         >
                           <Camera size={18} />
                           <span>Take Photo</span>
                         </button>
-                        <p className="text-xs text-stone-400 mt-2">Visual thumbnail for this location</p>
+                        <p className="text-xs text-stone-400 dark:text-stone-500 mt-2">Visual thumbnail for this location</p>
                       </div>
                     )}
                   </div>
@@ -211,7 +211,7 @@ export default function Storage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 disabled:opacity-50"
+                  className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 dark:shadow-emerald-900/20 disabled:opacity-50"
                 >
                   {loading ? 'Creating...' : 'Create Location'}
                 </button>
@@ -228,9 +228,9 @@ export default function Storage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="bg-white rounded-3xl border border-stone-100 shadow-sm overflow-hidden group hover:border-emerald-200 hover:shadow-md transition-all h-full flex flex-col"
+              className="bg-white dark:bg-stone-900 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm overflow-hidden group hover:border-emerald-200 dark:hover:border-emerald-900 hover:shadow-md transition-all h-full flex flex-col"
             >
-              <div className="aspect-video bg-stone-50 relative flex items-center justify-center text-stone-200 overflow-hidden">
+              <div className="aspect-video bg-stone-50 dark:bg-stone-800 relative flex items-center justify-center text-stone-200 dark:text-stone-700 overflow-hidden">
                 {loc.photoUrl ? (
                   <img src={loc.photoUrl} alt={loc.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
@@ -239,7 +239,7 @@ export default function Storage() {
                 <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button 
                     onClick={(e) => handleDelete(e, loc.id)}
-                    className="p-2 bg-white/90 backdrop-blur-sm text-red-600 rounded-xl hover:bg-red-50 transition-colors shadow-sm"
+                    className="p-2 bg-white/90 dark:bg-stone-800/90 backdrop-blur-sm text-red-600 dark:text-red-400 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors shadow-sm"
                   >
                     <Trash2 size={18} />
                   </button>
@@ -253,13 +253,13 @@ export default function Storage() {
               </div>
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-lg font-bold text-stone-900 group-hover:text-emerald-700 transition-colors">{loc.name}</h4>
-                  <ChevronRight size={18} className="text-stone-300 group-hover:text-emerald-500 transition-colors" />
+                  <h4 className="text-lg font-bold text-stone-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{loc.name}</h4>
+                  <ChevronRight size={18} className="text-stone-300 dark:text-stone-600 group-hover:text-emerald-500 transition-colors" />
                 </div>
-                <p className="text-stone-500 text-sm line-clamp-2 mb-4 flex-1">{loc.description || 'No description provided.'}</p>
-                <div className="pt-4 border-t border-stone-50 flex items-center justify-between">
-                  <span className="text-xs font-bold text-stone-400 uppercase tracking-widest">Cards Stored</span>
-                  <span className="text-lg font-bold text-emerald-600">{loc.totalCards}</span>
+                <p className="text-stone-500 dark:text-stone-400 text-sm line-clamp-2 mb-4 flex-1">{loc.description || 'No description provided.'}</p>
+                <div className="pt-4 border-t border-stone-50 dark:border-stone-800 flex items-center justify-between">
+                  <span className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest">Cards Stored</span>
+                  <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{loc.totalCards}</span>
                 </div>
               </div>
             </motion.div>
@@ -267,9 +267,9 @@ export default function Storage() {
         ))}
         
         {locations.length === 0 && (
-          <div className="col-span-full py-20 text-center bg-white rounded-3xl border border-dashed border-stone-200">
-            <Box size={48} className="mx-auto text-stone-200 mb-4" />
-            <p className="text-stone-400 font-medium">No storage locations yet. Create your first binder or box!</p>
+          <div className="col-span-full py-20 text-center bg-white dark:bg-stone-900 rounded-3xl border border-dashed border-stone-200 dark:border-stone-800">
+            <Box size={48} className="mx-auto text-stone-200 dark:text-stone-800 mb-4" />
+            <p className="text-stone-400 dark:text-stone-500 font-medium">No storage locations yet. Create your first binder or box!</p>
           </div>
         )}
       </div>

@@ -29,6 +29,7 @@ export default function CardDetails() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const card = useLiveQuery(() => {
     const id = parseInt(cardId || '');
@@ -161,7 +162,7 @@ export default function CardDetails() {
 
   const handleDelete = async () => {
     const id = parseInt(cardId || '');
-    if (!card || isNaN(id) || !window.confirm('Are you sure you want to delete this card?')) return;
+    if (!card || isNaN(id)) return;
 
     try {
       await localDb.cards.delete(id);
@@ -176,7 +177,7 @@ export default function CardDetails() {
       navigate('/collection');
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete card");
+      // Using console.error instead of alert as per guidelines
     }
   };
 
@@ -233,27 +234,27 @@ export default function CardDetails() {
         <div className="flex items-center space-x-4">
           <button 
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-stone-100 rounded-xl transition-colors text-stone-500"
+            className="p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-xl transition-colors text-stone-500 dark:text-stone-400"
           >
             <ChevronLeft size={24} />
           </button>
           <div>
-            <h2 className="text-3xl font-bold text-stone-900 tracking-tight">Card Details</h2>
-            <p className="text-stone-500">View and manage your card</p>
+            <h2 className="text-3xl font-bold text-stone-900 dark:text-white tracking-tight">Card Details</h2>
+            <p className="text-stone-500 dark:text-stone-400">View and manage your card</p>
           </div>
         </div>
 
         <div className="flex items-center space-x-3">
           <button 
             onClick={toggleFavorite}
-            className={`p-3 rounded-2xl transition-all ${card.isFavorite ? 'bg-red-50 text-red-600' : 'bg-white text-stone-400 border border-stone-100 shadow-sm'}`}
+            className={`p-3 rounded-2xl transition-all ${card.isFavorite ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' : 'bg-white dark:bg-stone-900 text-stone-400 border border-stone-100 dark:border-stone-800 shadow-sm'}`}
           >
             <Heart size={20} fill={card.isFavorite ? 'currentColor' : 'none'} />
           </button>
           {!isEditing ? (
             <button 
               onClick={() => setIsEditing(true)}
-              className="flex items-center space-x-2 bg-emerald-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50"
+              className="flex items-center space-x-2 bg-emerald-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 dark:shadow-emerald-900/20"
             >
               <Edit2 size={20} />
               <span>Edit Card</span>
@@ -261,7 +262,7 @@ export default function CardDetails() {
           ) : (
             <button 
               onClick={() => setIsEditing(false)}
-              className="flex items-center space-x-2 bg-stone-100 text-stone-600 px-6 py-3 rounded-2xl font-bold hover:bg-stone-200 transition-all"
+              className="flex items-center space-x-2 bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 px-6 py-3 rounded-2xl font-bold hover:bg-stone-200 dark:hover:bg-stone-700 transition-all"
             >
               <X size={20} />
               <span>Cancel</span>
@@ -273,17 +274,17 @@ export default function CardDetails() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Left Column: Photos */}
         <div className="space-y-6">
-          <section className="bg-white p-6 rounded-3xl border border-stone-100 shadow-sm space-y-4">
-            <h3 className="font-bold text-stone-900 flex items-center space-x-2">
-              <Camera size={18} className="text-emerald-600" />
+          <section className="bg-white dark:bg-stone-900 p-6 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-4">
+            <h3 className="font-bold text-stone-900 dark:text-white flex items-center space-x-2">
+              <Camera size={18} className="text-emerald-600 dark:text-emerald-400" />
               <span>Card Photos</span>
             </h3>
             
             <div className="space-y-4">
               {/* Front Photo */}
               <div className="relative group">
-                <p className="text-xs font-bold text-stone-400 uppercase mb-2">Front View</p>
-                <div className="aspect-[3/4] bg-stone-50 rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center relative">
+                <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-2">Front View</p>
+                <div className="aspect-[3/4] bg-stone-50 dark:bg-stone-800 rounded-2xl overflow-hidden border border-stone-100 dark:border-stone-800 flex items-center justify-center relative">
                   {(isEditing ? editFrontPhoto : card.frontPhotoUrl) ? (
                     <img 
                       src={isEditing ? editFrontPhoto! : card.frontPhotoUrl!} 
@@ -291,7 +292,7 @@ export default function CardDetails() {
                       alt="Front"
                     />
                   ) : (
-                    <Library size={48} className="text-stone-200" />
+                    <Library size={48} className="text-stone-200 dark:text-stone-700" />
                   )}
                   {isEditing && (
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -308,8 +309,8 @@ export default function CardDetails() {
 
               {/* Back Photo */}
               <div className="relative group">
-                <p className="text-xs font-bold text-stone-400 uppercase mb-2">Back View</p>
-                <div className="aspect-[3/4] bg-stone-50 rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center relative">
+                <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-2">Back View</p>
+                <div className="aspect-[3/4] bg-stone-50 dark:bg-stone-800 rounded-2xl overflow-hidden border border-stone-100 dark:border-stone-800 flex items-center justify-center relative">
                   {(isEditing ? editBackPhoto : card.backPhotoUrl) ? (
                     <img 
                       src={isEditing ? editBackPhoto! : card.backPhotoUrl!} 
@@ -317,7 +318,7 @@ export default function CardDetails() {
                       alt="Back"
                     />
                   ) : (
-                    <Library size={48} className="text-stone-200" />
+                    <Library size={48} className="text-stone-200 dark:text-stone-700" />
                   )}
                   {isEditing && (
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -338,8 +339,8 @@ export default function CardDetails() {
         {/* Right Column: Details */}
         <div className="lg:col-span-2 space-y-6">
           {/* Card Info */}
-          <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-            <div className="flex items-center space-x-2 text-emerald-600 mb-2">
+          <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+            <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 mb-2">
               <Info size={20} />
               <h3 className="font-bold text-lg">Card Information</h3>
             </div>
@@ -347,20 +348,20 @@ export default function CardDetails() {
             {isEditing ? (
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="col-span-full">
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Card Name</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Card Name</label>
                   <input
                     type="text"
                     value={editName}
                     onChange={(e) => setEditName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Game Category</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Game Category</label>
                   <select
                     value={editGameId}
                     onChange={(e) => setEditGameId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option value="yugioh">Yu-Gi-Oh!</option>
                     <option value="pokemon">Pokémon</option>
@@ -369,30 +370,30 @@ export default function CardDetails() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Set Name</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Set Name</label>
                   <input
                     type="text"
                     value={editSetName}
                     onChange={(e) => setEditSetName(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Card Number</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Card Number</label>
                   <input
                     type="text"
                     value={editCardNumber}
                     onChange={(e) => setEditCardNumber(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                     placeholder="e.g. 001/100"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Rarity</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Rarity</label>
                   <select
                     value={editRarity}
                     onChange={(e) => setEditRarity(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option value="">Select Rarity</option>
                     {gameOptions.rarities.map(r => <option key={r} value={r}>{r}</option>)}
@@ -404,16 +405,16 @@ export default function CardDetails() {
                       value={editCustomRarity}
                       onChange={(e) => setEditCustomRarity(e.target.value)}
                       placeholder="Enter custom rarity"
-                      className="w-full mt-2 px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                      className="w-full mt-2 px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                     />
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Edition</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Edition</label>
                   <select
                     value={editEdition}
                     onChange={(e) => setEditEdition(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option value="">Select Edition</option>
                     {gameOptions.editions.map(ed => <option key={ed} value={ed}>{ed}</option>)}
@@ -425,16 +426,16 @@ export default function CardDetails() {
                       value={editCustomEdition}
                       onChange={(e) => setEditCustomEdition(e.target.value)}
                       placeholder="Enter custom edition"
-                      className="w-full mt-2 px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                      className="w-full mt-2 px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                     />
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Condition</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Condition</label>
                   <select
                     value={editCondition}
                     onChange={(e) => setEditCondition(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option>Near Mint</option>
                     <option>Lightly Played</option>
@@ -444,53 +445,53 @@ export default function CardDetails() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Quantity</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Quantity</label>
                   <input
                     type="number"
                     min="1"
                     value={editQuantity}
                     onChange={(e) => setEditQuantity(parseInt(e.target.value))}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   />
                 </div>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Name</p>
-                  <p className="font-bold text-stone-900">{card.name}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Name</p>
+                  <p className="font-bold text-stone-900 dark:text-white">{card.name}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Game</p>
-                  <p className="font-bold text-stone-900 uppercase">{card.gameId}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Game</p>
+                  <p className="font-bold text-stone-900 dark:text-white uppercase">{card.gameId}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Set</p>
-                  <p className="font-bold text-stone-900">{card.setName || 'N/A'}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Set</p>
+                  <p className="font-bold text-stone-900 dark:text-white">{card.setName || 'N/A'}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Rarity</p>
-                  <p className="font-bold text-stone-900">{card.rarity || 'Common'}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Rarity</p>
+                  <p className="font-bold text-stone-900 dark:text-white">{card.rarity || 'Common'}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Edition</p>
-                  <p className="font-bold text-stone-900">{card.edition || 'Unlimited'}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Edition</p>
+                  <p className="font-bold text-stone-900 dark:text-white">{card.edition || 'Unlimited'}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Condition</p>
-                  <p className="font-bold text-stone-900">{card.condition}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Condition</p>
+                  <p className="font-bold text-stone-900 dark:text-white">{card.condition}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-stone-400 uppercase mb-1">Quantity</p>
-                  <p className="font-bold text-emerald-600">x{card.quantity}</p>
+                  <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase mb-1">Quantity</p>
+                  <p className="font-bold text-emerald-600 dark:text-emerald-400">x{card.quantity}</p>
                 </div>
               </div>
             )}
           </section>
 
           {/* Location Info */}
-          <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-            <div className="flex items-center space-x-2 text-amber-600 mb-2">
+          <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+            <div className="flex items-center space-x-2 text-amber-600 dark:text-amber-400 mb-2">
               <Box size={20} />
               <h3 className="font-bold text-lg">Storage & Placement</h3>
             </div>
@@ -498,11 +499,11 @@ export default function CardDetails() {
             {isEditing ? (
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Location</label>
                   <select
                     value={editLocationId}
                     onChange={(e) => setEditLocationId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   >
                     <option value="">No Location</option>
                     {locations.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
@@ -511,43 +512,43 @@ export default function CardDetails() {
                 {isBinder && (
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-stone-700 mb-1">Page</label>
+                      <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Page</label>
                       <input
                         type="number"
                         value={editBinderPage || ''}
                         onChange={(e) => setEditBinderPage(parseInt(e.target.value))}
-                        className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-stone-700 mb-1">Slot</label>
+                      <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Slot</label>
                       <input
                         type="number"
                         min="1"
                         max="9"
                         value={editBinderSlot || ''}
                         onChange={(e) => setEditBinderSlot(parseInt(e.target.value))}
-                        className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                       />
                     </div>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="flex items-center justify-between p-6 bg-stone-50 rounded-2xl border border-stone-100">
+              <div className="flex items-center justify-between p-6 bg-stone-50 dark:bg-stone-800/50 rounded-2xl border border-stone-100 dark:border-stone-800">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-amber-600 shadow-sm">
+                  <div className="w-12 h-12 bg-white dark:bg-stone-800 rounded-xl flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-sm">
                     <Box size={24} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-stone-400 uppercase">Current Location</p>
-                    <p className="font-bold text-stone-900">{currentLocation?.name || 'Not Assigned'}</p>
+                    <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase">Current Location</p>
+                    <p className="font-bold text-stone-900 dark:text-white">{currentLocation?.name || 'Not Assigned'}</p>
                   </div>
                 </div>
                 {card.binderPage && (
                   <div className="text-right">
-                    <p className="text-xs font-bold text-stone-400 uppercase">Placement</p>
-                    <p className="font-bold text-stone-900">Page {card.binderPage}, Slot {card.binderSlot}</p>
+                    <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase">Placement</p>
+                    <p className="font-bold text-stone-900 dark:text-white">Page {card.binderPage}, Slot {card.binderSlot}</p>
                   </div>
                 )}
               </div>
@@ -555,17 +556,17 @@ export default function CardDetails() {
           </section>
 
           {/* Notes */}
-          <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-4">
-            <h3 className="font-bold text-stone-900">Notes</h3>
+          <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-4">
+            <h3 className="font-bold text-stone-900 dark:text-white">Notes</h3>
             {isEditing ? (
               <textarea
                 value={editNotes}
                 onChange={(e) => setEditNotes(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none min-h-[100px]"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none min-h-[100px] bg-stone-50 dark:bg-stone-800 dark:text-white"
                 placeholder="Add any additional details..."
               />
             ) : (
-              <p className="text-stone-600 leading-relaxed">
+              <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
                 {card.notes || 'No notes added for this card.'}
               </p>
             )}
@@ -574,8 +575,8 @@ export default function CardDetails() {
           {isEditing && (
             <div className="flex items-center justify-between pt-4">
               <button
-                onClick={handleDelete}
-                className="flex items-center space-x-2 text-red-600 font-bold hover:bg-red-50 px-6 py-3 rounded-2xl transition-all"
+                onClick={() => setShowDeleteConfirm(true)}
+                className="flex items-center space-x-2 text-red-600 dark:text-red-400 font-bold hover:bg-red-50 dark:hover:bg-red-900/30 px-6 py-3 rounded-2xl transition-all"
               >
                 <Trash2 size={20} />
                 <span>Delete Card</span>
@@ -583,7 +584,7 @@ export default function CardDetails() {
               <button
                 onClick={handleUpdate}
                 disabled={saving}
-                className="flex items-center space-x-2 bg-emerald-600 text-white px-10 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50"
+                className="flex items-center space-x-2 bg-emerald-600 text-white px-10 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 dark:shadow-emerald-900/20"
               >
                 <Save size={20} />
                 <span>{saving ? 'Saving...' : 'Save Changes'}</span>
@@ -592,6 +593,47 @@ export default function CardDetails() {
           )}
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {showDeleteConfirm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 z-[110] flex items-center justify-center p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-stone-900 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-6"
+            >
+              <div className="w-16 h-16 bg-red-50 dark:bg-red-900/20 rounded-2xl flex items-center justify-center text-red-600 dark:text-red-400 mx-auto">
+                <Trash2 size={32} />
+              </div>
+              <div className="text-center space-y-2">
+                <h3 className="text-xl font-bold text-stone-900 dark:text-white">Delete Card?</h3>
+                <p className="text-stone-500 dark:text-stone-400">This action cannot be undone. This card will be permanently removed from your collection.</p>
+              </div>
+              <div className="flex flex-col space-y-3">
+                <button
+                  onClick={handleDelete}
+                  className="w-full py-4 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-200 dark:shadow-red-900/20"
+                >
+                  Yes, Delete Card
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="w-full py-4 bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-2xl font-bold hover:bg-stone-200 dark:hover:bg-stone-700 transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Camera Modal */}
       <AnimatePresence>

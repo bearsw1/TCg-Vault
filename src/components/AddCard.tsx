@@ -223,14 +223,14 @@ export default function AddCard() {
   return (
     <div className="max-w-4xl mx-auto">
       <header className="mb-8">
-        <h2 className="text-3xl font-bold text-stone-900 tracking-tight">Add New Card</h2>
-        <p className="text-stone-500">Add a card to your inventory</p>
+        <h2 className="text-3xl font-bold text-stone-900 dark:text-white tracking-tight">Add New Card</h2>
+        <p className="text-stone-500 dark:text-stone-400">Add a card to your inventory</p>
       </header>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Photo Section */}
-        <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-          <div className="flex items-center space-x-2 text-emerald-600 mb-2">
+        <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+          <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 mb-2">
             <Camera size={20} />
             <h3 className="font-bold text-lg">Card Photos</h3>
           </div>
@@ -238,10 +238,10 @@ export default function AddCard() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Front Photo */}
             <div className="space-y-4">
-              <p className="text-xs font-bold text-stone-400 uppercase tracking-widest text-center">Front View</p>
+              <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest text-center">Front View</p>
               <div className="flex flex-col items-center justify-center">
                 {frontPhoto ? (
-                  <div className="relative w-full max-w-[200px] aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white group">
+                  <div className="relative w-full max-w-[200px] aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white dark:border-stone-800 group">
                     <img src={frontPhoto} alt="Front" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center space-y-2">
                       <button
@@ -279,12 +279,12 @@ export default function AddCard() {
                     <button
                       type="button"
                       onClick={() => startCamera('front')}
-                      className="w-full aspect-[3/4] border-2 border-dashed border-stone-200 rounded-3xl flex flex-col items-center justify-center text-stone-400 hover:border-emerald-300 hover:text-emerald-500 hover:bg-emerald-50/30 transition-all group"
+                      className="w-full aspect-[3/4] border-2 border-dashed border-stone-200 dark:border-stone-800 rounded-3xl flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:border-emerald-300 dark:hover:border-emerald-700 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-50/30 dark:hover:bg-emerald-900/20 transition-all group"
                     >
                       <Camera size={32} className="mb-2 group-hover:scale-110 transition-transform" />
                       <span className="font-bold text-sm">Scan or Upload Front</span>
                     </button>
-                    <label className="w-full py-2 border border-stone-200 rounded-xl flex items-center justify-center space-x-2 text-stone-500 hover:bg-stone-50 cursor-pointer transition-colors">
+                    <label className="w-full py-2 border border-stone-200 dark:border-stone-800 rounded-xl flex items-center justify-center space-x-2 text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer transition-colors">
                       <Plus size={16} />
                       <span className="text-xs font-bold uppercase tracking-wider">Upload File</span>
                       <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileUpload(e, 'front')} />
@@ -296,10 +296,10 @@ export default function AddCard() {
 
             {/* Back Photo */}
             <div className="space-y-4">
-              <p className="text-xs font-bold text-stone-400 uppercase tracking-widest text-center">Back View</p>
+              <p className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest text-center">Back View</p>
               <div className="flex flex-col items-center justify-center">
                 {backPhoto ? (
-                  <div className="relative w-full max-w-[200px] aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white group">
+                  <div className="relative w-full max-w-[200px] aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border-4 border-white dark:border-stone-800 group">
                     <img src={backPhoto} alt="Back" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center space-y-2">
                       <button
@@ -328,12 +328,12 @@ export default function AddCard() {
                     <button
                       type="button"
                       onClick={() => startCamera('back')}
-                      className="w-full aspect-[3/4] border-2 border-dashed border-stone-200 rounded-3xl flex flex-col items-center justify-center text-stone-400 hover:border-emerald-300 hover:text-emerald-500 hover:bg-emerald-50/30 transition-all group"
+                      className="w-full aspect-[3/4] border-2 border-dashed border-stone-200 dark:border-stone-800 rounded-3xl flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:border-emerald-300 dark:hover:border-emerald-700 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-50/30 dark:hover:bg-emerald-900/20 transition-all group"
                     >
                       <Camera size={32} className="mb-2 group-hover:scale-110 transition-transform" />
                       <span className="font-bold text-sm">Scan or Upload Back</span>
                     </button>
-                    <label className="w-full py-2 border border-stone-200 rounded-xl flex items-center justify-center space-x-2 text-stone-500 hover:bg-stone-50 cursor-pointer transition-colors">
+                    <label className="w-full py-2 border border-stone-200 dark:border-stone-800 rounded-xl flex items-center justify-center space-x-2 text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-800 cursor-pointer transition-colors">
                       <Plus size={16} />
                       <span className="text-xs font-bold uppercase tracking-wider">Upload File</span>
                       <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileUpload(e, 'back')} />
@@ -388,8 +388,8 @@ export default function AddCard() {
         </section>
 
         {/* Basic Info */}
-        <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-          <div className="flex items-center space-x-2 text-emerald-600 mb-2">
+        <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+          <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 mb-2">
             <Layers size={20} />
             <h3 className="font-bold text-lg">Basic Information</h3>
           </div>
@@ -397,9 +397,9 @@ export default function AddCard() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="col-span-full">
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-sm font-medium text-stone-700">Card Name</label>
+                <label className="block text-sm font-medium text-stone-700 dark:text-stone-300">Card Name</label>
                 {isScanning && (
-                  <div className="flex items-center space-x-2 text-emerald-600 text-xs font-bold animate-pulse">
+                  <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 text-xs font-bold animate-pulse">
                     <Loader2 size={14} className="animate-spin" />
                     <Sparkles size={14} />
                     <span>AI Scanning Card Details...</span>
@@ -412,7 +412,7 @@ export default function AddCard() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className={`w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all ${isScanning ? 'bg-emerald-50/50 border-emerald-200' : ''}`}
+                  className={`w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none transition-all bg-stone-50 dark:bg-stone-800 dark:text-white ${isScanning ? 'bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-800' : ''}`}
                   placeholder={isScanning ? "Scanning..." : "e.g. Blue-Eyes White Dragon"}
                 />
                 {isScanning && (
@@ -423,7 +423,7 @@ export default function AddCard() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Game Category</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Game Category</label>
               <select
                 required
                 value={gameId}
@@ -434,7 +434,7 @@ export default function AddCard() {
                   setCustomRarity('');
                   setCustomEdition('');
                 }}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               >
                 <option value="">Select Game</option>
                 <option value="yugioh">Yu-Gi-Oh!</option>
@@ -444,12 +444,12 @@ export default function AddCard() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Set Name</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Set Name</label>
               <input
                 type="text"
                 value={cardSetName}
                 onChange={(e) => setCardSetName(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                 placeholder="e.g. Legend of Blue Eyes"
               />
             </div>
@@ -457,19 +457,19 @@ export default function AddCard() {
         </section>
 
         {/* Card Details */}
-        <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-          <div className="flex items-center space-x-2 text-blue-600 mb-2">
+        <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+          <div className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 mb-2">
             <Plus size={20} />
             <h3 className="font-bold text-lg">Card Details</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className={rarity === 'Other' ? 'col-span-1' : 'col-span-1'}>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Rarity</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Rarity</label>
               <select
                 value={rarity}
                 onChange={(e) => setRarity(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               >
                 <option value="">Select Rarity</option>
                 {gameOptions.rarities.map(r => <option key={r} value={r}>{r}</option>)}
@@ -480,17 +480,17 @@ export default function AddCard() {
                   type="text"
                   value={customRarity}
                   onChange={(e) => setCustomRarity(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 rounded-lg border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+                  className="mt-2 w-full px-4 py-2 rounded-lg border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-stone-50 dark:bg-stone-800 dark:text-white"
                   placeholder="Enter custom rarity"
                 />
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Edition</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Edition</label>
               <select
                 value={edition}
                 onChange={(e) => setEdition(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               >
                 <option value="">Select Edition</option>
                 {gameOptions.editions.map(ed => <option key={ed} value={ed}>{ed}</option>)}
@@ -501,17 +501,17 @@ export default function AddCard() {
                   type="text"
                   value={customEdition}
                   onChange={(e) => setCustomEdition(e.target.value)}
-                  className="mt-2 w-full px-4 py-2 rounded-lg border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+                  className="mt-2 w-full px-4 py-2 rounded-lg border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none text-sm bg-stone-50 dark:bg-stone-800 dark:text-white"
                   placeholder="Enter custom edition"
                 />
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Condition</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Condition</label>
               <select
                 value={condition}
                 onChange={(e) => setCondition(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               >
                 <option>Near Mint</option>
                 <option>Lightly Played</option>
@@ -521,33 +521,33 @@ export default function AddCard() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Quantity</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Quantity</label>
               <input
                 type="number"
                 min="1"
                 required
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               />
             </div>
           </div>
         </section>
 
         {/* Location Data */}
-        <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-          <div className="flex items-center space-x-2 text-amber-600 mb-2">
+        <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+          <div className="flex items-center space-x-2 text-amber-600 dark:text-amber-400 mb-2">
             <Box size={20} />
             <h3 className="font-bold text-lg">Storage & Placement</h3>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">Storage Location</label>
+              <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Storage Location</label>
               <select
                 value={locationId}
                 onChange={(e) => setLocationId(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
               >
                 <option value="">Select Location</option>
                 {locations.map(l => <option key={l.id} value={l.id}>{l.name} ({l.type})</option>)}
@@ -557,24 +557,24 @@ export default function AddCard() {
             {isBinder && (
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Page</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Page</label>
                   <input
                     type="number"
                     min="1"
                     value={binderPage || ''}
                     onChange={(e) => setBinderPage(parseInt(e.target.value))}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-stone-700 mb-1">Slot (1-9)</label>
+                  <label className="block text-sm font-medium text-stone-700 dark:text-stone-300 mb-1">Slot (1-9)</label>
                   <input
                     type="number"
                     min="1"
                     max="9"
                     value={binderSlot || ''}
                     onChange={(e) => setBinderSlot(parseInt(e.target.value))}
-                    className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 dark:border-stone-800 focus:ring-2 focus:ring-emerald-500 outline-none bg-stone-50 dark:bg-stone-800 dark:text-white"
                   />
                 </div>
               </div>
@@ -582,8 +582,8 @@ export default function AddCard() {
           </div>
 
           {isBinder && binderPage && (
-            <div className="mt-4 p-6 bg-stone-50 rounded-2xl border border-stone-100">
-              <p className="text-sm font-bold text-stone-500 uppercase tracking-widest mb-4 flex items-center">
+            <div className="mt-4 p-6 bg-stone-50 dark:bg-stone-800/50 rounded-2xl border border-stone-100 dark:border-stone-800">
+              <p className="text-sm font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest mb-4 flex items-center">
                 <Grid3X3 size={16} className="mr-2" /> 3x3 Binder Layout (Page {binderPage})
               </p>
               <div className="grid grid-cols-3 gap-2 max-w-[200px] mx-auto">
@@ -594,7 +594,7 @@ export default function AddCard() {
                     className={`aspect-[3/4] rounded-md border-2 flex items-center justify-center text-xs font-bold transition-all cursor-pointer ${
                       binderSlot === slot 
                         ? 'bg-emerald-500 border-emerald-600 text-white shadow-md scale-105' 
-                        : 'bg-white border-stone-200 text-stone-300 hover:border-stone-400'
+                        : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-300 dark:text-stone-600 hover:border-stone-400 dark:hover:border-stone-500'
                     }`}
                   >
                     {slot}
@@ -609,14 +609,14 @@ export default function AddCard() {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="px-8 py-3 rounded-2xl font-semibold text-stone-500 hover:bg-stone-100 transition-all"
+            className="px-8 py-3 rounded-2xl font-semibold text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="bg-emerald-600 text-white px-12 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 flex items-center space-x-2"
+            className="bg-emerald-600 text-white px-12 py-3 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200/50 dark:shadow-emerald-900/20 flex items-center space-x-2"
           >
             <Save size={20} />
             <span>{loading ? 'Saving Card...' : 'Save to Vault'}</span>

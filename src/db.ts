@@ -11,7 +11,7 @@ export class TCGVaultDB extends Dexie {
     this.version(1).stores({
       cards: '++id, name, gameId, locationId, isFavorite, createdAt',
       storageLocations: '++id, name, type, createdAt',
-      games: '++id, name, createdAt'
+      games: '++id, name, icon, createdAt'
     });
   }
 }
@@ -23,9 +23,9 @@ export async function seedInitialData() {
   const gameCount = await localDb.games.count();
   if (gameCount === 0) {
     await localDb.games.bulkAdd([
-      { name: 'Yu-Gi-Oh!', createdAt: new Date() } as any,
-      { name: 'Pokémon', createdAt: new Date() } as any,
-      { name: 'Magic: The Gathering', createdAt: new Date() } as any
+      { name: 'Yu-Gi-Oh!', icon: '🎴', createdAt: new Date() } as any,
+      { name: 'Pokémon', icon: '⚡', createdAt: new Date() } as any,
+      { name: 'Magic: The Gathering', icon: '🔥', createdAt: new Date() } as any
     ]);
   }
 

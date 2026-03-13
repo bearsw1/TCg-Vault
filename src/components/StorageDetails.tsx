@@ -58,20 +58,20 @@ export default function StorageDetails() {
         <div className="flex items-center space-x-4">
           <button 
             onClick={() => navigate('/storage')}
-            className="p-2 hover:bg-stone-100 rounded-xl transition-colors text-stone-500"
+            className="p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-xl transition-colors text-stone-500 dark:text-stone-400"
           >
             <ChevronLeft size={24} />
           </button>
           <div>
-            <h2 className="text-3xl font-bold text-stone-900 tracking-tight">{location.name}</h2>
-            <p className="text-stone-500">{location.type} • {cards.length} cards stored</p>
+            <h2 className="text-3xl font-bold text-stone-900 dark:text-white tracking-tight">{location.name}</h2>
+            <p className="text-stone-500 dark:text-stone-400">{location.type} • {cards.length} cards stored</p>
           </div>
         </div>
 
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="flex items-center space-x-2 text-red-600 font-bold hover:bg-red-50 px-4 py-2 rounded-xl transition-all disabled:opacity-50"
+          className="flex items-center space-x-2 text-red-600 dark:text-red-400 font-bold hover:bg-red-50 dark:hover:bg-red-900/30 px-4 py-2 rounded-xl transition-all disabled:opacity-50"
         >
           <Trash2 size={20} />
           <span>{deleting ? 'Deleting...' : 'Delete'}</span>
@@ -81,23 +81,23 @@ export default function StorageDetails() {
       <div className="grid md:grid-cols-3 gap-8">
         {/* Location Info Card */}
         <div className="space-y-6">
-          <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm space-y-6">
-            <div className="aspect-square bg-stone-50 rounded-2xl overflow-hidden border border-stone-100 flex items-center justify-center">
+          <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm space-y-6">
+            <div className="aspect-square bg-stone-50 dark:bg-stone-800 rounded-2xl overflow-hidden border border-stone-100 dark:border-stone-800 flex items-center justify-center">
               {location.photoUrl ? (
                 <img src={location.photoUrl} className="w-full h-full object-cover" alt={location.name} />
               ) : (
-                <Box size={64} className="text-stone-200" />
+                <Box size={64} className="text-stone-200 dark:text-stone-700" />
               )}
             </div>
             
             <div className="space-y-4">
-              <div className="flex items-center space-x-3 text-stone-600">
+              <div className="flex items-center space-x-3 text-stone-600 dark:text-stone-300">
                 <MapPin size={20} className="text-emerald-500" />
                 <span className="font-medium">{location.type}</span>
               </div>
               {location.description && (
-                <div className="p-4 bg-stone-50 rounded-2xl border border-stone-100">
-                  <p className="text-sm text-stone-600 leading-relaxed">{location.description}</p>
+                <div className="p-4 bg-stone-50 dark:bg-stone-800/50 rounded-2xl border border-stone-100 dark:border-stone-800">
+                  <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">{location.description}</p>
                 </div>
               )}
             </div>
@@ -106,13 +106,13 @@ export default function StorageDetails() {
 
         {/* Cards List */}
         <div className="md:col-span-2 space-y-6">
-          <section className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm">
+          <section className="bg-white dark:bg-stone-900 p-8 rounded-3xl border border-stone-100 dark:border-stone-800 shadow-sm">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-bold text-lg text-stone-900 flex items-center space-x-2">
-                <Library size={20} className="text-emerald-600" />
+              <h3 className="font-bold text-lg text-stone-900 dark:text-white flex items-center space-x-2">
+                <Library size={20} className="text-emerald-600 dark:text-emerald-500" />
                 <span>Stored Cards</span>
               </h3>
-              <span className="text-xs font-bold text-stone-400 uppercase tracking-widest">
+              <span className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest">
                 {cards.length} Entries
               </span>
             </div>
@@ -122,21 +122,21 @@ export default function StorageDetails() {
                 <Link key={card.id} to={`/card/${card.id}`}>
                   <motion.div
                     whileHover={{ x: 4 }}
-                    className="flex items-center justify-between p-4 bg-stone-50 hover:bg-emerald-50 rounded-2xl border border-stone-100 hover:border-emerald-100 transition-all group"
+                    className="flex items-center justify-between p-4 bg-stone-50 dark:bg-stone-800/50 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-2xl border border-stone-100 dark:border-stone-800 hover:border-emerald-100 dark:hover:border-emerald-900 transition-all group"
                   >
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-16 bg-white rounded-lg overflow-hidden border border-stone-100 flex-shrink-0">
+                      <div className="w-12 h-16 bg-white dark:bg-stone-800 rounded-lg overflow-hidden border border-stone-100 dark:border-stone-700 flex-shrink-0">
                         {card.frontPhotoUrl && <img src={card.frontPhotoUrl} className="w-full h-full object-cover" />}
                       </div>
                       <div>
-                        <h4 className="font-bold text-stone-900 group-hover:text-emerald-700 transition-colors">{card.name}</h4>
-                        <p className="text-xs text-stone-400 font-mono">{card.setName || 'Unknown Set'}</p>
+                        <h4 className="font-bold text-stone-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{card.name}</h4>
+                        <p className="text-xs text-stone-400 dark:text-stone-500 font-mono">{card.setName || 'Unknown Set'}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-emerald-600">x{card.quantity}</p>
+                      <p className="font-bold text-emerald-600 dark:text-emerald-400">x{card.quantity}</p>
                       {card.binderPage && (
-                        <p className="text-[10px] text-stone-400 uppercase font-bold">P{card.binderPage} S{card.binderSlot}</p>
+                        <p className="text-[10px] text-stone-400 dark:text-stone-500 uppercase font-bold">P{card.binderPage} S{card.binderSlot}</p>
                       )}
                     </div>
                   </motion.div>
@@ -145,8 +145,8 @@ export default function StorageDetails() {
 
               {cards.length === 0 && (
                 <div className="py-12 text-center">
-                  <Library size={40} className="mx-auto text-stone-200 mb-2" />
-                  <p className="text-stone-400 font-medium">No cards assigned to this location yet.</p>
+                  <Library size={40} className="mx-auto text-stone-200 dark:text-stone-800 mb-2" />
+                  <p className="text-stone-400 dark:text-stone-500 font-medium">No cards assigned to this location yet.</p>
                 </div>
               )}
             </div>
